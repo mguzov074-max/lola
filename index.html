@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FastFood — вкусно, быстро, сочно!</title>
+
+    <style>
+        /* =========================
+           ОСНОВНЫЕ НАСТРОЙКИ
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fff8f0;
+            color: #222;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #ffffff;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        .navbar {
+            min-height: 75px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff3d00;
+        }
+
+        .logo span {
+            color: #222;
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: #333;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff3d00;
+        }
+
+        .header-button {
+            background: #ff3d00;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .header-button:hover {
+            background: #e63200;
+            transform: scale(1.05);
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 650px;
+            background:
+                radial-gradient(circle at 80% 50%, rgba(255,255,255,0.18), transparent 30%),
+                linear-gradient(135deg, #ff512f, #dd2476);
+
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .hero-text .small-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #ffe082;
+        }
+
+        .hero h1 {
+            font-size: 70px;
+            line-height: 1.05;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #ffe082;
+        }
+
+        .hero p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            color: #fff3e0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 28px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #ff3d00;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            background: #fff3cd;
+        }
+
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #ff3d00;
+        }
+
+        .hero-food {
+            font-size: 230px;
+            filter: drop-shadow(0 25px 20px rgba(0,0,0,0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+            background: white;
+            padding: 35px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            text-align: center;
+        }
+
+        .stat {
+            border-right: 1px solid #ddd;
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat h3 {
+            font-size: 32px;
+            color: #ff3d00;
+        }
+
+        .stat p {
+            color: #666;
+            margin-top: 5px;
+        }
+
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        section {
+            padding: 90px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 42px;
+            color: #222;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #777;
+            font-size: 17px;
+        }
+
+
+        /* =========================
+           CATEGORIES
+        ========================= */
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .category {
+            background: white;
+            border-radius: 20px;
+            padding: 25px 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            transition: 0.3s;
+        }
+
+        .category:hover {
+            transform: translateY(-8px);
+            background: #fff3ed;
+        }
+
+        .category-icon {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        .category h3 {
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           MENU
+        ========================= */
+
+        .menu {
+            background: #fff1e5;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .food-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .food-image {
+            height: 190px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffcc80, #ff7043);
+            font-size: 110px;
+        }
+
+        .food-info {
+            padding: 22px;
+        }
+
+        .food-info h3 {
+            font-size: 23px;
+            margin-bottom: 8px;
+        }
+
+        .food-info p {
+            color: #777;
+            line-height: 1.5;
+            min-height: 45px;
+        }
+
+        .food-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff3d00;
+        }
+
+        .order-btn {
+            background: #ff3d00;
+            color: white;
+            padding: 10px 17px;
+            border-radius: 20px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .order-btn:hover {
+            background: #d93200;
+        }
+
+
+        /* =========================
+           PROMO
+        ========================= */
+
+        .promo {
+            background: linear-gradient(135deg, #212121, #424242);
+            color: white;
+        }
+
+        .promo-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .promo-text {
+            max-width: 650px;
+        }
+
+        .promo h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .promo p {
+            color: #ddd;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .promo-food {
+            font-size: 150px;
+        }
+
+
+        /* =========================
+           WHY US
+        ========================= */
+
+        .advantages {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .advantage {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .advantage-icon {
+            font-size: 55px;
+            margin-bottom: 20px;
+        }
+
+        .advantage h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .advantage p {
+            color: #777;
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           REVIEWS
+        ========================= */
+
+        .reviews {
+            background: #fff1e5;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .review {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .stars {
+            color: #ff9800;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .review p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .review-author {
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           DELIVERY
+        ========================= */
+
+        .delivery {
+            background: white;
+        }
+
+        .delivery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .delivery-text h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .delivery-text p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .delivery-list {
+            list-style: none;
+        }
+
+        .delivery-list li {
+            margin-bottom: 15px;
+            font-size: 17px;
+        }
+
+        .delivery-image {
+            background: linear-gradient(135deg, #ff7043, #ff1744);
+            border-radius: 30px;
+            min-height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 170px;
+        }
+
+
+        /* =========================
+           ORDER FORM
+        ========================= */
+
+        .order-section {
+            background: #ff3d00;
+            color: white;
+        }
+
+        .order-form {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            color: #222;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .input-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: #ff3d00;
+            border: none;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #df3500;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #171717;
+            color: white;
+            padding: 60px 0 25px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            color: #ff7043;
+        }
+
+        .footer-column p {
+            color: #aaa;
+            line-height: 1.7;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #aaa;
+            margin-bottom: 12px;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .copyright {
+            border-top: 1px solid #333;
+            padding-top: 25px;
+            text-align: center;
+            color: #777;
+        }
+
+
+        /* =========================
+           АДАПТИВНОСТЬ
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            nav {
+                display: none;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 50px;
+            }
+
+            .hero-food {
+                font-size: 150px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+
+            .stat {
+                border-right: none;
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .menu-grid,
+            .advantages,
+            .review-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .delivery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .hero {
+                min-height: 600px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            .hero-food {
+                font-size: 110px;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
+            }
+
+            .categories,
+            .menu-grid,
+            .advantages,
+            .review-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .promo-box {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .promo-food {
+                font-size: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+    <div class="container navbar">
+
+        <a href="#home" class="logo">
+            🍔 Fast<span>Food</span>
+        </a>
+
+        <nav>
+            <a href="#home">Главная</a>
+            <a href="#categories">Категории</a>
+            <a href="#menu">Меню</a>
+            <a href="#delivery">Доставка</a>
+            <a href="#reviews">Отзывы</a>
+        </nav>
+
+        <a href="#order" class="header-button">
+            Заказать
+        </a>
+
+    </div>
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="home">
+
+    <div class="container hero-content">
+
+        <div class="hero-text">
+
+            <div class="small-title">
+                🔥 ГОРЯЧОЕ ПРЕДЛОЖЕНИЕ
+            </div>
+
+            <h1>
+                Вкусно.<br>
+                Быстро.<br>
+                <span>Сочно!</span>
+            </h1>
+
+            <p>
+                Любимый фастфуд прямо к вашей двери.
+                Бургеры, пицца, картошка фри и многое другое.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#menu" class="btn btn-primary">
+                    🍔 Смотреть меню
+                </a>
+
+                <a href="#order" class="btn btn-outline">
+                    🚀 Заказать сейчас
+                </a>
+            </div>
+
+        </div>
+
+        <div class="hero-food">
+            🍔
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     STATS
+========================= -->
+
+<div class="stats">
+
+    <div class="container stats-grid">
+
+        <div class="stat">
+            <h3>5+</h3>
+            <p>Лет работы</p>
+        </div>
+
+        <div class="stat">
+            <h3>50K+</h3>
+            <p>Заказов</p>
+        </div>
+
+        <div class="stat">
+            <h3>30 мин</h3>
+            <p>Средняя доставка</p>
+        </div>
+
+        <div class="stat">
+            <h3>4.9 ⭐</h3>
+            <p>Рейтинг</p>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     CATEGORIES
+========================= -->
+
+<section id="categories">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>🍽️ Что будем кушать?</h2>
+
+            <p>
+                Выбирай любимую категорию
+            </p>
+
+        </div>
+
+
+        <div class="categories">
+
+            <div class="category">
+                <div class="category-icon">🍔</div>
+                <h3>Бургеры</h3>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">🍕</div>
+                <h3>Пицца</h3>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">🍟</div>
+                <h3>Закуски</h3>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">🌮</div>
+                <h3>Тако</h3>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">🥤</div>
+                <h3>Напитки</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MENU
+========================= -->
+
+<section class="menu" id="menu">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>🔥 Популярное меню</h2>
+
+            <p>
+                Наши самые любимые позиции
+            </p>
+
+        </div>
+
+
+        <div class="menu-grid">
+
+
+            <div class="food-card">
+
+                <div class="food-image">
+                    🍔
+                </div>
+
+                <div class="food-info">
+
+                    <h3>Big Cheese Burger</h3>
+
+                    <p>
+                        Двойная котлета, сыр чеддер,
+                        салат, помидор и фирменный соус.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <div class="price">
+                            35 000 сум
+                        </div>
+
+                        <button class="order-btn">
+                            В корзину
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card">
+
+                <div class="food-image">
+                    🍗
+                </div>
+
+                <div class="food-info">
+
+                    <h3>Chicken Box</h3>
+
+                    <p>
+                        Хрустящая курочка,
+                        картофель и соус.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <div class="price">
+                            32 000 сум
+                        </div>
+
+                        <button class="order-btn">
+                            В корзину
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card">
+
+                <div class="food-image">
+                    🍕
+                </div>
+
+                <div class="food-info">
+
+                    <h3>Pizza Pepperoni</h3>
+
+                    <p>
+                        Томатный соус, сыр моцарелла
+                        и пепперони.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <div class="price">
+                            55 000 сум
+                        </div>
+
+                        <button class="order-btn">
+                            В корзину
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card">
+
+                <div class="food-image">
+                    🍟
+                </div>
+
+                <div class="food-info">
+
+                    <h3>French Fries</h3>
+
+                    <p>
+                        Хрустящая картошка фри
+                        с фирменным соусом.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <div class="price">
+                            15 000 сум
+                        </div>
+
+                        <button class="order-btn">
+                            В корзину
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card">
+
+                <div class="food-image">
+                    🌮
+                </div>
+
+                <div class="food-info">
+
+                    <h3>Mexican Taco</h3>
+
+                    <p>
+                        Мясо, овощи, сыр и
+                        острый мексиканский соус.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <div class="price">
+                            28 000 сум
+                        </div>
+
+                        <button class="order-btn">
+                            В корзину
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card">
+
+                <div class="food-image">
+                    🥤
+                </div>
+
+                <div class="food-info">
+
+                    <h3>Cola 0.5L</h3>
+
+                    <p>
+                        Освежающий холодный напиток.
+                    </p>
+
+                    <div class="food-bottom">
+
+                        <div class="price">
+                            10 000 сум
+                        </div>
+
+                        <button class="order-btn">
+                            В корзину
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PROMO
+========================= -->
+
+<section class="promo">
+
+    <div class="container promo-box">
+
+        <div class="promo-text">
+
+            <h2>
+                🎁 Скидка 20%
+            </h2>
+
+            <p>
+                Сделай заказ от 100 000 сум
+                и получи скидку 20% на весь заказ.
+            </p>
+
+            <a href="#order" class="btn btn-primary">
+                Получить скидку
+            </a>
+
+        </div>
+
+        <div class="promo-food">
+            🍕
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ADVANTAGES
+========================= -->
+
+<section>
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>💥 Почему мы?</h2>
+
+            <p>
+                Мы делаем всё, чтобы тебе было вкусно
+            </p>
+
+        </div>
+
+
+        <div class="advantages">
+
+            <div class="advantage">
+
+                <div class="advantage-icon">
+                    🥬
+                </div>
+
+                <h3>Свежие продукты</h3>
+
+                <p>
+                    Используем только свежие продукты
+                    и качественные ингредиенты.
+                </p>
+
+            </div>
+
+
+            <div class="advantage">
+
+                <div class="advantage-icon">
+                    🚀
+                </div>
+
+                <h3>Быстрая доставка</h3>
+
+                <p>
+                    Привезём горячий заказ
+                    примерно за 30 минут.
+                </p>
+
+            </div>
+
+
+            <div class="advantage">
+
+                <div class="advantage-icon">
+                    ❤️
+                </div>
+
+                <h3>Готовим с любовью</h3>
+
+                <p>
+                    Каждый заказ готовится
+                    специально для тебя.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     REVIEWS
+========================= -->
+
+<section class="reviews" id="reviews">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>⭐ Отзывы клиентов</h2>
+
+            <p>
+                Что говорят наши гости
+            </p>
+
+        </div>
+
+
+        <div class="review-grid">
+
+            <div class="review">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    Очень вкусный бургер!
+                    Доставка приехала быстро,
+                    еда была горячей.
+                </p>
+
+                <div class="review-author">
+                    — Азиз
+                </div>
+
+            </div>
+
+
+            <div class="review">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    Заказываю здесь уже не первый раз.
+                    Особенно нравится пицца и картошка.
+                </p>
+
+                <div class="review-author">
+                    — Мадина
+                </div>
+
+            </div>
+
+
+            <div class="review">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    Отличное место для быстрого
+                    перекуса. Всё вкусно и недорого.
+                </p>
+
+                <div class="review-author">
+                    — Тимур
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DELIVERY
+========================= -->
+
+<section class="delivery" id="delivery">
+
+    <div class="container delivery-grid">
+
+        <div class="delivery-text">
+
+            <h2>
+                🚗 Доставка до двери
+            </h2>
+
+            <p>
+                Не хочешь выходить из дома?
+                Без проблем! Мы привезём твой любимый
+                фастфуд прямо к тебе.
+            </p>
+
+            <ul class="delivery-list">
+
+                <li>✅ Доставка от 30 минут</li>
+
+                <li>✅ Заказ от 50 000 сум</li>
+
+                <li>✅ Оплата наличными или картой</li>
+
+                <li>✅ Горячая и свежая еда</li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="delivery-image">
+            🛵
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ORDER
+========================= -->
+
+<section class="order-section" id="order">
+
+    <div class="container">
+
+        <div class="section-title" style="color:white;">
+
+            <h2 style="color:white;">
+                🚀 Сделать заказ
+            </h2>
+
+            <p style="color:#ffe0d6;">
+                Заполни форму, и мы свяжемся с тобой
+            </p>
+
+        </div>
+
+
+        <form class="order-form">
+
+            <div class="form-row">
+
+                <div class="input-group">
+
+                    <label>
+                        Ваше имя
+                    </label>
+
+                    <input
+                        type="text"
+                        placeholder="Например: Али"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Телефон
+                    </label>
+
+                    <input
+                        type="tel"
+                        placeholder="+998 90 123 45 67"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Что хотите заказать?
+                </label>
+
+                <select>
+
+                    <option>
+                        Big Cheese Burger
+                    </option>
+
+                    <option>
+                        Chicken Box
+                    </option>
+
+                    <option>
+                        Pizza Pepperoni
+                    </option>
+
+                    <option>
+                        French Fries
+                    </option>
+
+                    <option>
+                        Mexican Taco
+                    </option>
+
+                    <option>
+                        Cola
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Адрес доставки
+                </label>
+
+                <input
+                    type="text"
+                    placeholder="Улица, дом, квартира"
+                    required
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Комментарий
+                </label>
+
+                <textarea
+                    placeholder="Например: положите побольше соуса"
+                ></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                🍔 Оформить заказ
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+
+            <div class="footer-column">
+
+                <h3>🍔 FastFood</h3>
+
+                <p>
+                    Вкусный фастфуд,
+                    быстрая доставка
+                    и хорошее настроение.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Навигация</h3>
+
+                <a href="#home">Главная</a>
+                <a href="#menu">Меню</a>
+                <a href="#delivery">Доставка</a>
+                <a href="#reviews">Отзывы</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Контакты</h3>
+
+                <p>
+                    📞 +998 90 123 45 67
+                </p>
+
+                <p>
+                    📍 Ташкент, Узбекистан
+                </p>
+
+                <p>
+                    ✉️ info@fastfood.uz
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Мы в соцсетях</h3>
+
+                <a href="#">Instagram</a>
+                <a href="#">Telegram</a>
+                <a href="#">Facebook</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 FastFood. Все права защищены.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+    /*
+       Простая демонстрация отправки формы.
+       Пока данные никуда не отправляются.
+    */
+
+    const form = document.querySelector(".order-form");
+
+    form.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        alert(
+            "🎉 Спасибо за заказ! " +
+            "Мы скоро свяжемся с вами."
+        );
+
+        form.reset();
+
+    });
+
+
+    /*
+       Кнопки "В корзину"
+    */
+
+    const buttons = document.querySelectorAll(".order-btn");
+
+    buttons.forEach(function(button) {
+
+        button.addEventListener("click", function() {
+
+            button.textContent = "✓ Добавлено";
+
+            button.style.background = "#2e7d32";
+
+            setTimeout(function() {
+
+                button.textContent = "В
